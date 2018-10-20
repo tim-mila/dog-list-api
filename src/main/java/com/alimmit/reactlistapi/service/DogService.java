@@ -1,8 +1,10 @@
 package com.alimmit.reactlistapi.service;
 
+import com.alimmit.reactlistapi.controller.Breed;
+
 public interface DogService {
 
-    Iterable<String> breeds();
+    Iterable<Breed> breeds();
 
-    Iterable<String> breeds(String query);
+    Iterable<Breed> breeds(String query);
 }

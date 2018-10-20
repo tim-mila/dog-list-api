@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.alimmit</groupId>
-	<artifactId>react-list-api</artifactId>
+	<artifactId>dog-breed-list-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>react-list-api</name>
-	<description>Demo project for Spring Boot</description>
+	<name>dog-breed-list-api</name>
+	<description>API for dog breed list app</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<thin-jar.version>1.0.12.RELEASE</thin-jar.version>
 	</properties>
 
 	<dependencies>
@@ -68,6 +69,27 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework.boot.experimental</groupId>
+						<artifactId>spring-boot-thin-layout</artifactId>
+						<version>${thin-jar.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot.experimental</groupId>
+				<artifactId>spring-boot-thin-maven-plugin</artifactId>
+				<version>${thin-jar.version}</version>
+				<executions>
+					<execution>
+						<id>resolve</id>
+						<goals>
+							<goal>resolve</goal>
+						</goals>
+						<inherited>false</inherited>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

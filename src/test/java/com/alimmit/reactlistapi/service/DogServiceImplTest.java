@@ -1,6 +1,7 @@
 package com.alimmit.reactlistapi.service;
 
 import com.alimmit.reactlistapi.ReactListApiApplicationTests;
+import com.alimmit.reactlistapi.controller.Breed;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,14 +15,14 @@ public class DogServiceImplTest extends ReactListApiApplicationTests {
 
     @Test
     public void breeds() {
-        final Iterable<String> breeds = dogService.breeds();
+        final Iterable<Breed> breeds = dogService.breeds();
         assertNotNull(breeds);
         assertTrue(breeds.iterator().hasNext());
     }
 
     @Test
     public void breedsFiltered() {
-        final Iterable<String> breeds = dogService.breeds("viz");
+        final Iterable<Breed> breeds = dogService.breeds("viz");
         assertNotNull(breeds);
         assertTrue(breeds.iterator().hasNext());
     }

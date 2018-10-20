@@ -15,16 +15,16 @@ public class DogControllerTest extends AbstractMockMvcTest {
 
     @Test
     public void breeds() throws Exception {
-        final List<String> breeds = doGetList(new TypeReference<List<String>>() {}, status().isOk(), DogController.PATH);
+        final List<Breed> breeds = doGetList(new TypeReference<List<Breed>>() {}, status().isOk(), DogController.PATH);
         assertTrue(CollectionUtils.isNotEmpty(breeds));
-        assertTrue(StringUtils.isNotBlank(breeds.iterator().next()));
+        assertTrue(StringUtils.isNotBlank(breeds.iterator().next().getName()));
     }
 
     @Test
     public void breeds1() throws Exception {
-        final List<String> breeds = doGetList(new TypeReference<List<String>>() {}, status().isOk(), DogController.PATH + "?q={q}", "viz");
+        final List<Breed> breeds = doGetList(new TypeReference<List<Breed>>() {}, status().isOk(), DogController.PATH + "?q={q}", "viz");
         assertTrue(CollectionUtils.isNotEmpty(breeds));
-        final String found = breeds.stream().filter(breed -> StringUtils.equalsIgnoreCase(breed, "vizsla")).findFirst().orElseThrow(() -> new RuntimeException("No breed found matching filter"));
-        assertEquals("vizsla", found);
+        final Breed found = breeds.stream().filter(breed -> StringUtils.equalsIgnoreCase(breed.getName(), "vizsla")).findFirst().orElseThrow(() -> new RuntimeException("No breed found matching filter"));
+        assertEquals("vizsla", found.getName());
     }
 }

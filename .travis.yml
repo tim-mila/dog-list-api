@@ -1,0 +1,19 @@
+sudo: required
+language: java
+jdk: oraclejdk8
+services:
+  - docker
+install: true
+script: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+cache:
+  directories:
+  - $HOME/.m2
+
+after_success:
+- pip install --user awscli # install aws cli w/o sudo
+- export PATH=$PATH:$HOME/.local/bin # put aws in the path
+- eval $(aws ecr get-login --region us-east-1) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
+- docker build -t dog-breed-api .
+- docker tag dog-breed-api:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/dog-breed-api:latest
+- docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/dog-breed-api:latest
